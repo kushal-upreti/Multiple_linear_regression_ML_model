@@ -16,7 +16,7 @@ print("------------------Multiple Regression ML Model--------------------------\
 for i in range(len(x_input)):
     x_input[i][0] = 1
     for j in range(1, len(x_input[0])):
-        x_input[i][j] = float(input(f"Enter the X{j} input: "))
+        x_input[i][j] = float(input(f"Enter the X{j} input feature: "))
           
 obj1.predict(x_input)
 

@@ -86,7 +86,7 @@ def make_pivot_one(square_matrix, result, row_index, pivot_num):
             square_matrix[row_index][i] /= pivot_num
             result[row_index][i] /= pivot_num
     else:
-        print("Matrix has pivot elemtn 0 so inverse doesn't exit")
+        raise ValueError("Pivot element is zero so inverse doesn't exist")
 
 def matrix_multiplication(matrix_A, matrix_B):
     result= []
@@ -106,23 +106,25 @@ def matrix_multiplication(matrix_A, matrix_B):
 
 def matrix_inverse(square_matrix):
     result = []
+    if len(square_matrix) == len(square_matrix[0]):
 
-    for i in range(len(square_matrix)):
-        row = []
-        for j in range(len(square_matrix[0])):
-            row.append(0)
-        result.append(row)
-        result[i][i] += 1
+        for i in range(len(square_matrix)):
+            row = []
+            for j in range(len(square_matrix[0])):
+                row.append(0)
+            result.append(row)
+            result[i][i] += 1
 
-    for i in range(len(square_matrix)):
-        pivot_num = square_matrix[i][i]
-        row_index = i
-        make_pivot_one(square_matrix,result, row_index, pivot_num)
-        for j in range(len(square_matrix)):
-                if i != j:
-                    factor = square_matrix[j][i]
-                    for k in range(len(square_matrix)):
-                        square_matrix[j][k] -= (factor*(square_matrix[i][k]))
-                        result[j][k] -= (factor*(result[i][k]))    
-    return result
-
+        for i in range(len(square_matrix)):
+            pivot_num = square_matrix[i][i]
+            row_index = i
+            make_pivot_one(square_matrix,result, row_index, pivot_num)
+            for j in range(len(square_matrix)):
+                    if i != j:
+                        factor = square_matrix[j][i]
+                        for k in range(len(square_matrix)):
+                            square_matrix[j][k] -= (factor*(square_matrix[i][k]))
+                            result[j][k] -= (factor*(result[i][k]))    
+        return result
+    else:
+        raise ValueError("The matrix is not square so inverse doesn't exist")
